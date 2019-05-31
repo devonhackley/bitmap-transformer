@@ -2,8 +2,9 @@
 bitmap transformer CLI
 
 ## Files
-    * [App](../src/main/java/bitmap/transformer/App.java)
-    * [Bitmap](../src/main/java/bitmap/transformer/Bitmap.java)
+    [App](../src/main/java/bitmap/transformer/App.java)
+    
+    Bitmap](../src/main/java/bitmap/transformer/Bitmap.java)
 
 ## Usage
     * run command:
