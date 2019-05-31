@@ -15,3 +15,4 @@ bitmap transformer CLI
     * grayscale - This transform will gray out the given bmp file.
     * blackout - This transform will blackout the entire bmp file.
     * randomize - This transform will randomize the pixels in the bmp file.
+    * pixelate - This transform will pixelate the bmp file.
