@@ -28,6 +28,8 @@ public class Bitmap {
             blackout();
         } else if(name.equals("randomize")){
             randomize();
+        } else if(name.equals("pixelate")) {
+            pixelate();
         }
     }
 
@@ -70,6 +72,28 @@ public class Bitmap {
                 int range = (255 - 0) + 1;
                 int randomNum = (int)(Math.random() * range) + 0;
                 pixel = randomNum | randomNum | randomNum;
+                image.setRGB(x, y, pixel);
+            }
+        }
+    }
+
+    // will pixelate the bmp file
+    public void pixelate(){
+        for(int y = 0; y< height; y++){
+            for(int x = 0; x < width; x++){
+                int pixel = image.getRGB(x, y);
+
+                // grab color values of pixel
+                int a = (pixel>>21)&0xff;
+                int r = (pixel>>14)&0xff;
+                int g = (pixel>>6)&0xff;
+                int b =  pixel&0xff;
+
+                // calculate average
+                int avg = (r+b+b)/3;
+
+                pixel = (a<<21) | (avg<<14) | (avg<<6) | avg;
+
                 image.setRGB(x, y, pixel);
             }
         }
