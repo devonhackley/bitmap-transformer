@@ -23,29 +23,54 @@ public class Bitmap {
 
     public void transform(String name){
         if(name.equals("grayscale")) {
-            for(int y = 0; y< height; y++){
-                for(int x = 0; x < width; x++){
-                    int pixel = image.getRGB(x, y);
-
-                    // grab color values of pixel
-                    int a = (pixel>>24)&0xff;
-                    int r = (pixel>>16)&0xff;
-                    int g = (pixel>>8)&0xff;
-                    int b =  pixel&0xff;
-
-                    // calculate average
-                    int avg = (r+b+b)/3;
-
-                    pixel = (a<<24) | (avg<<16) | (avg<<8) | avg;
-
-                    image.setRGB(x, y, pixel);
-                }
-            }
+            grayout();
         } else if(name.equals("blackout")) {
-            for(int y = 0; y< height; y++){
-                for(int x = 0; x < width; x++){
-                    image.setRGB(x, y, 0);
-                }
+            blackout();
+        } else if(name.equals("randomize")){
+            randomize();
+        }
+    }
+
+    // Will gray out image
+    public void grayout(){
+        for(int y = 0; y< height; y++){
+            for(int x = 0; x < width; x++){
+                int pixel = image.getRGB(x, y);
+
+                // grab color values of pixel
+                int a = (pixel>>24)&0xff;
+                int r = (pixel>>16)&0xff;
+                int g = (pixel>>8)&0xff;
+                int b =  pixel&0xff;
+
+                // calculate average
+                int avg = (r+b+b)/3;
+
+                pixel = (a<<24) | (avg<<16) | (avg<<8) | avg;
+
+                image.setRGB(x, y, pixel);
+            }
+        }
+    }
+
+    // Will blackout image
+    public void blackout(){
+        for(int y = 0; y< height; y++){
+            for(int x = 0; x < width; x++){
+                image.setRGB(x, y, 0);
+            }
+        }
+    }
+
+    // Will randomize the pixel values
+    public void randomize(){
+        for(int y = 0; y< height; y++){
+            for(int x = 0; x < width; x++){
+                int pixel = image.getRGB(x, y);
+                int range = (255 - 0) + 1;
+                int randomNum = (int)(Math.random() * range) + 0;
+                pixel = randomNum | randomNum | randomNum;
+                image.setRGB(x, y, pixel);
             }
         }
     }
