@@ -3,12 +3,49 @@
  */
 package bitmap.transformer;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import  java.io.IOException;
+
 public class App {
-    public String getGreeting() {
-        return "Hello world.";
-    }
+    // class variables
+    static String inputFilePath;
+    static String outputFilePath;
+    static String transformName;
+
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+
+        //assign class variables
+        inputFilePath = args[0];
+        outputFilePath = args[1];
+        transformName = args[2];
+
+        // generate file from inputFilePath
+        File file = new File(inputFilePath);
+        BufferedImage image = null;
+
+        try
+        {
+            // read image file
+            image = ImageIO.read(file);
+            // create bitmap instance
+            Bitmap bitmap = new Bitmap(image, outputFilePath);
+            // transform
+            bitmap.transform(transformName);
+            // write to output file
+            bitmap.writeToFile();
+
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
     }
+
+
+
 }
+
