@@ -22,8 +22,34 @@ public class Bitmap {
     }
 
     public void transform(String name){
+        if(name.equals("grayscale")) {
+            for(int y = 0; y< height; y++){
+                for(int x = 0; x < width; x++){
+                    int pixel = image.getRGB(x, y);
 
+                    // grab color values of pixel
+                    int a = (pixel>>24)&0xff;
+                    int r = (pixel>>16)&0xff;
+                    int g = (pixel>>8)&0xff;
+                    int b =  pixel&0xff;
+
+                    // calculate average
+                    int avg = (r+b+b)/3;
+
+                    pixel = (a<<24) | (avg<<16) | (avg<<8) | avg;
+
+                    image.setRGB(x, y, pixel);
+                }
+            }
+        } else if(name.equals("blackout")) {
+            for(int y = 0; y< height; y++){
+                for(int x = 0; x < width; x++){
+                    image.setRGB(x, y, 0);
+                }
+            }
+        }
     }
+
 
     // instance methods
     public void writeToFile(){
